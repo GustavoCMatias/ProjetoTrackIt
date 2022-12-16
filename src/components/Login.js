@@ -2,14 +2,24 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../img/Logo.png"
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Login() {
     const [email, setEmail] = React.useState('')
     const [senha, setSenha] = React.useState('')
+    const nav = useNavigate();
+
+    function entrar(e){
+        e.preventDefault()
+        nav('/hoje')
+
+    }
+
     return (
         <TelaLogin>
             <Logo src={logo} />
-            <form onSubmit={''}>
+            <form onSubmit={entrar}>
                 <input
                     type="email"
                     id="Email"
@@ -31,14 +41,17 @@ export default function Login() {
                 <button type="submit">Entrar</button>
 
             </form>
-            <p>Não tem uma conta? Cadastre-se!</p>
+            <Link to='/cadastro'>
+                <p>Não tem uma conta? Cadastre-se!</p>
+            </Link>
+            
         </TelaLogin>
     )
 
 }
 
 const TelaLogin = styled.div`
-    padding-top: 68px;
+    padding-top: 60px;
     display: block;
     
 
@@ -51,7 +64,6 @@ const TelaLogin = styled.div`
         margin-bottom: 6px;
         
         
-        color: #DBDBDB;
         font-family: Lexend Deca;
         font-size: 20px;
         font-weight: 400;
