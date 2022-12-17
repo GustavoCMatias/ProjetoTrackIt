@@ -14,6 +14,9 @@ const TelaCabecalho = styled.div`
     width: 375px;
     height: 70px;
     background-color: #126BA5;
+    position: fixed;
+    top: 0;
+    left: 0;
 
     padding: 10px 18px;
 

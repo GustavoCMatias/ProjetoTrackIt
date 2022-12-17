@@ -45,6 +45,10 @@ table {
 	border-spacing: 0;
 }
 
+a{
+	text-decoration: none;
+}
+
 *{
 	box-sizing: border-box;
 }
