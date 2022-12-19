@@ -86,8 +86,11 @@ const TelaLogin = styled.div`
 
 
         border: 1px solid #D4D4D4;
-        padding-left: 11px
+        padding-left: 11px;
 
+        ::placeholder{
+                color: #D4D4D4;
+            }
     }
     button{
         width: 303px;
