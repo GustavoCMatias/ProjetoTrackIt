@@ -14,7 +14,8 @@ export default function Hoje() {
     const agora = new Date();
     const [habitos, setHabitos] = React.useState([])
     const [effect, setEffect] = React.useState(0)
-    
+
+    const percentage = (completos.completos/completos.total*100).toFixed(1);
 
     useEffect(() => {
         const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today'
@@ -25,8 +26,16 @@ export default function Hoje() {
         }
         axios.get(url, config)
             .then((resp) => {
+                let comp = 0
                 setHabitos(resp.data)
-                setCompletos({...completos, total: resp.data.length})
+                
+                for(let i=0; i<resp.data.length; i++){
+                    if(resp.data[i].done){
+                        comp= comp+1
+                    }
+                }
+                setCompletos({...completos, completos:comp, total: resp.data.length})
+
             })
         
     }, [effect])
@@ -63,7 +72,8 @@ export default function Hoje() {
             <Cabecalho />
             <TelaHoje>
                 <h1>{`${dias[agora.getDay()]}, ${agora.getDate()}/${agora.getMonth() + 1}`}</h1>
-                <h2>Nenhum hábito concluído ainda</h2>
+                <h2 className={completos.completos===0?'':'escondido'}>Nenhum hábito concluído ainda</h2>
+                <h2 className={completos.completos===0?'escondido':'verdeletra'}>{percentage}% dos hábitos concluídos</h2>
                 {habitos.map((each) =>
                     <Tarefa>
                         <div>
@@ -111,7 +121,13 @@ const TelaHoje = styled.div`
         margin-bottom: 28px;
 
     }
-    
+    .escondido{
+        display: none;
+    }
+
+    .verdeletra{
+        color: #8FC549;
+    }
 `
 
 const Tarefa = styled.div`
@@ -165,7 +181,5 @@ const Tarefa = styled.div`
     .verde{
         background-color: #8FC549;
     }
-    .verdeletra{
-        color: #8FC549;
-    }
+    
 `
