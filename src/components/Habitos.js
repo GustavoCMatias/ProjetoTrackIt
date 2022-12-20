@@ -71,6 +71,9 @@ export default function Habitos() {
             })
     }
     function cliqueLixo(id){
+        if(!window.confirm('Realmente deseja deletar este hábito?')){
+            return('')
+        }
         const url=`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
         const config = {
             headers: {
@@ -108,7 +111,7 @@ export default function Habitos() {
                 </NovoHabito>
                 
                 {listHabitos.map((each) => 
-                    <HabitoAtual>
+                    <HabitoAtual key={each.id}>
                         <div className="topoAtual">
                             <h1>{each.name}</h1>
                             <img src={lixo} alt="deletar" onClick={() => cliqueLixo(each.id)}/>

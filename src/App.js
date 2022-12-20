@@ -14,7 +14,7 @@ import React from "react";
 function App() {
   const [foto, setFoto] = React.useState('')
   const [token, setToken] = React.useState('')
-  const [completos, setCompletos] = React.useState({})
+  const [completos, setCompletos] = React.useState({completos: 0, total: 1})
 
   return (
     <AuthContext.Provider value={{token, setToken}}>

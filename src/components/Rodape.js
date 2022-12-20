@@ -2,9 +2,13 @@ import styled from "styled-components"
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
+import CompletosContext from "../contexts/CompletosContext";
+import { useContext } from "react";
 
-const percentage = 60;
 export default function Cabecalho() {
+    const {completos, setCompletos} = useContext(CompletosContext)
+    const percentage = completos.completos/completos.total*100;
+    console.log(completos)
     return (
         <TelaRodape>
             <Link to="/habitos">
