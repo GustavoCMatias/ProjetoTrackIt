@@ -5,15 +5,16 @@ import check from "../img/Vector.png"
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 
-
+const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
 export default function Hoje() {
     const {token} =useContext(AuthContext)
+    const agora = new Date();
 
     return (
         <>
             <Cabecalho />
             <TelaHoje>
-                <h1>Segunda, 17/05</h1>
+                <h1>{`${dias[agora.getDay()]}, ${agora.getDate()}/${agora.getMonth()+1}`}</h1>
                 <h2>Nenhum hábito concluído ainda</h2>
                 <Tarefa>
                     <div>
