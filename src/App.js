@@ -6,22 +6,35 @@ import Habitos from "./components/Habitos";
 import Hoje from "./components/Hoje";
 import Historico from "./components/Historico";
 import GlobalStyle from "./globalStyles";
-
+import AuthContext from "./contexts/AuthContext";
+import FotoContext from "./contexts/FotoContext";
+import CompletosContext from "./contexts/CompletosContext";
+import React from "react";
 
 function App() {
+  const [foto, setFoto] = React.useState('')
+  const [token, setToken] = React.useState('')
+  const [completos, setCompletos] = React.useState({})
+
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Tela>
-        <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path="/cadastro" element={<Cadastro/>}/>
-          <Route path="/habitos" element={<Habitos/>}/>
-          <Route path="/hoje" element={<Hoje/>}/>
-          <Route path="/historico" element={<Historico/>}/>
-        </Routes>        
-      </Tela>
-    </BrowserRouter>
+    <AuthContext.Provider value={{token, setToken}}>
+      <FotoContext.Provider value={{foto, setFoto}}>
+        <CompletosContext.Provider value={{completos, setCompletos}}>
+          <BrowserRouter>
+            <GlobalStyle />
+            <Tela>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/habitos" element={<Habitos />} />
+                <Route path="/hoje" element={<Hoje />} />
+                <Route path="/historico" element={<Historico />} />
+              </Routes>
+            </Tela>
+          </BrowserRouter>
+        </CompletosContext.Provider>
+      </FotoContext.Provider>
+    </AuthContext.Provider>
   );
 }
 

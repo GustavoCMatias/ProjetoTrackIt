@@ -1,7 +1,12 @@
+import { useContext } from "react"
 import styled from "styled-components"
-import foto from "../img/patrick.jpg"
+import FotoContext from "../contexts/FotoContext"
+
+
+
 
 export default function Cabecalho(){
+    const {foto} = useContext(FotoContext)
     return(
         <TelaCabecalho>
             <p>TrackIt</p>

@@ -1,18 +1,38 @@
-
-import React from "react";
+import axios from "axios"
+import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "../img/Logo.png"
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../contexts/AuthContext";
+import FotoContext from "../contexts/FotoContext";
 
 
 export default function Login() {
     const [email, setEmail] = React.useState('')
     const [senha, setSenha] = React.useState('')
     const nav = useNavigate();
+    const {setToken} = useContext(AuthContext)
+    const {setFoto} = useContext(FotoContext)
 
     function entrar(e){
         e.preventDefault()
-        nav('/hoje')
+        const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login'
+        const body = {
+            email: email,
+            password: senha
+        }
+        axios.post(url,body)
+            .then((resp)=>{
+                setFoto(resp.data.image)
+                setToken(resp.data.token)
+                nav('/hoje')
+            })
+            .catch((resp)=>{
+                console.log(resp)
+                alert(resp.response.data.message)
+            }
+            )
+        
 
     }
 

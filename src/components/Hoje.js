@@ -2,9 +2,13 @@ import styled from "styled-components";
 import Cabecalho from "./Cabecalho";
 import Rodape from "./Rodape"
 import check from "../img/Vector.png"
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
 
 export default function Hoje() {
+    const {token} =useContext(AuthContext)
+
     return (
         <>
             <Cabecalho />
