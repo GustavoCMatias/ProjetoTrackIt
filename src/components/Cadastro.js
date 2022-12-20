@@ -1,18 +1,40 @@
-
+import axios from "axios"
 import React from "react";
 import styled from "styled-components";
 import logo from "../img/Logo.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
     const [email, setEmail] = React.useState('')
     const [senha, setSenha] = React.useState('')
     const [nome, setNome] = React.useState('')
     const [foto, setFoto] = React.useState('')
+    const nav = useNavigate()
+
+    function EnviarCadastro(e){
+        e.preventDefault()
+        const url = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up'
+        const body = {
+            email: email,
+            name: nome,
+            image: foto,
+            password: senha
+        }
+        console.log(body)
+        axios.post(url, body)
+            .then(()=>{
+                nav('/')
+            })
+            .catch((resp)=>{
+                alert(resp.response.data.message)
+            }
+
+            )
+    }
     return (
         <TelaLogin>
             <Logo src={logo} />
-            <form onSubmit={''}>
+            <form onSubmit={EnviarCadastro}>
                 <input
                     type="email"
                     id="Email"
